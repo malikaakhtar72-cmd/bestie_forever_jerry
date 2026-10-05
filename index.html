@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Javeria! 🎈✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap');
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+            min-height: 100vh;
+            color: #4a4a4a;
+            overflow-x: hidden;
+        }
+
+        /* ---------------- LOCK SCREEN ---------------- */
+        #lockScreen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 182, 193, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .pass-box {
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+        }
+
+        .pass-box h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4757;
+            margin-top: 0;
+        }
+
+        .pass-input {
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #ff6b81;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .btn-main {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn-main:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+
+        /* Shake Effect on Wrong Password */
+        .shake {
+            animation: shakeAnim 0.4s ease-in-out;
+        }
+
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        #errorMsg {
+            color: #ff4757;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* ---------------- MAIN CONTENT ---------------- */
+        #mainContent {
+            display: none;
+            padding: 20px 15px 80px 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1.title {
+            font-family: 'Fredoka One', cursive;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+            font-size: 2.5rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Vinyl Jukebox */
+        .jukebox-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(5px);
+        }
+
+        .vinyl {
+            width: 70px; height: 70px;
+            background: #222;
+            border-radius: 50%;
+            border: 5px solid #444;
+            display: flex; align-items: center; justify-content: center;
+            animation: spin 3s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .vinyl-inner {
+            width: 25px; height: 25px;
+            background: #ff6b81;
+            border-radius: 50%;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Time Capsule Grid */
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            color: #ff4757;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .capsule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .capsule-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px dashed #ff9a9e;
+            text-align: center;
+        }
+
+        .capsule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 129, 0.2);
+        }
+
+        /* Certificate Section */
+        .certificate {
+            background: #fff;
+            border: 4px double #ff6b81;
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* Balloon Elements */
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            width: 50px;
+            height: 65px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            cursor: pointer;
+            z-index: 100;
+            animation: floatUp 8s linear infinite;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 23px;
+            width: 2px;
+            height: 15px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-body {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 85%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Player (Add your Happy Birthday Javeria audio file path here) -->
+    <audio id="bgMusic" loop>
+        <source src="happy_birthday_javeria.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 1. Secret Password Entry Screen -->
+    <div id="lockScreen">
+        <div class="pass-box" id="passBox">
+            <h2>🔑 VIP Access</h2>
+            <p style="font-size: 0.95rem;">Enter Secret Password to Enter the Celebration Zone</p>
+            <input type="password" id="passInput" class="pass-input" placeholder="Enter Secret Code...">
+            <br>
+            <button class="btn-main" onclick="unlockSite()">Unlock Room ✨</button>
+            <div id="errorMsg">Nice try, stranger! Ask Malika for the key! 😜</div>
+        </div>
+    </div>
+
+    <!-- Main Protected Content -->
+    <div id="mainContent">
+        <h1 class="title">🎉 Happy Birthday Javeria! 💖</h1>
+
+        <!-- 2. Jukebox Section -->
+        <div class="jukebox-card">
+            <div class="vinyl" id="vinylRecord">
+                <div class="vinyl-inner"></div>
+            </div>
+            <div>
+                <h3 style="margin: 0; color: #ff4757;">🎵 Now Playing</h3>
+                <p style="margin: 5px 0 10px 0; font-size: 0.9rem;">Happy Birthday Javeria Special</p>
+                <button class="btn-main" style="padding: 6px 16px; font-size: 0.85rem;" onclick="toggleMusic()">Pause / Play 🎶</button>
+            </div>
+        </div>
+
+        <!-- 3. Time Capsule Section -->
+        <h2 class="section-title">⏳ Time Capsule Notes</h2>
+        <div class="capsule-grid">
+            <div class="capsule-card" onclick="openNote('Feeling Sad 🥺', 'Remember that I am always just one call away! You are strong, amazing, and loved! 💕')">
+                <h3>Open when you are feeling sad 🥺</h3>
+            </div>
+            <div class="capsule-card" onclick="openNote('Exam Day 📚', 'Take a deep breath! You have prepared well and you are going to ace this exam! All the best! 🌟')">
+                <h3>Open on your next exam day 📚</h3>
+            </div>
+            <div class="capsule-card" onclick="openNote('Missing Me 💕', 'I miss you more! Sending you a huge virtual hug right now! 🤗✨')">
+                <h3>Open when you miss me 💕</h3>
+            </div>
+        </div>
+
+        <!-- 4. BFF Certificate -->
+        <div class="certificate">
+            <h2 style="font-family: 'Fredoka One', cursive; color: #ff6b81; margin: 0;">📜 Best Friends Forever Certificate</h2>
+            <p style="margin-top: 15px;">This certificate officially verifies that</p>
+            <h2 style="color: #ff4757; margin: 5px 0;">Javeria</h2>
+            <p>is the most wonderful, caring, and best friend ever!</p>
+            <p style="font-weight: bold; color: #ff6b81; margin-top: 20px;">Awarded with Love by: Malika 💖</p>
+        </div>
+    </div>
+
+    <!-- Modal for Notes -->
+    <div class="modal" id="noteModal">
+        <div class="modal-body">
+            <h3 id="modalTitle" style="color: #ff4757; margin-top: 0;"></h3>
+            <p id="modalMessage" style="font-size: 1rem; line-height: 1.5;"></p>
+            <button class="btn-main" onclick="closeNote()">Close 💕</button>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_PASS = "javeria"; // Change your password here (e.g. 'javeria' or 'besties')
+
+        function unlockSite() {
+            const input = document.getElementById('passInput').value.trim().toLowerCase();
+            const passBox = document.getElementById('passBox');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (input === SECRET_PASS) {
+                document.getElementById('lockScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Play music & spin vinyl
+                const music = document.getElementById('bgMusic');
+                music.play().then(() => {
+                    document.getElementById('vinylRecord').style.animationPlayState = 'running';
+                }).catch(() => console.log('Auto-play prevented by browser policy'));
+
+                // Start generating floating balloons
+                startBalloons();
+            } else {
+                passBox.classList.add('shake');
+                errorMsg.style.display = 'block';
+                setTimeout(() => passBox.classList.remove('shake'), 400);
+            }
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const vinyl = document.getElementById('vinylRecord');
+            if (music.paused) {
+                music.play();
+                vinyl.style.animationPlayState = 'running';
+            } else {
+                music.pause();
+                vinyl.style.animationPlayState = 'paused';
+            }
+        }
+
+        function openNote(title, msg) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = msg;
+            document.getElementById('noteModal').style.display = 'flex';
+        }
+
+        function closeNote() {
+            document.getElementById('noteModal').style.display = 'none';
+        }
+
+        function startBalloons() {
+            const colors = ['#ff6b81', '#ff9ff3', '#feca57', '#48dbfb', '#ff9a9e'];
+            setInterval(() => {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 90 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 4 + 5) + 's';
+                
+                // Pop balloon on click
+                balloon.onclick = function() {
+                    this.remove();
+                };
+
+                document.body.appendChild(balloon);
+
+                setTimeout(() => balloon.remove(), 8000);
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
